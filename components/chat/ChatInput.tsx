@@ -134,7 +134,7 @@ export function ChatInput({
     (value.trim().length > 0 || selectedImages.length > 0) && !disabled;
 
   return (
-    <View className="bg-white px-4 py-3">
+    <View className="bg-white px-4 py-2">
       {/* Selected Images Preview */}
       {selectedImages.length > 0 && (
         <View className="flex-row mb-3 gap-2">

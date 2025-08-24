@@ -8,32 +8,50 @@ const API_KEY =
 
 export const GEMINI_MODELS: GeminiModel[] = [
   {
-    id: "gemini-pro",
-    name: "gemini-pro",
-    displayName: "Gemini Pro",
+    id: "gemini-2.5-pro",
+    name: "gemini-2.5-pro",
+    displayName: "Gemini 2.5 Pro",
     description:
-      "Most capable model for reasoning, planning, and understanding",
-    supportImages: false,
-    supportWebSearch: false,
-    maxTokens: 30720,
+      "State-of-the-art thinking model with reasoning capabilities for complex problems",
+    supportImages: true,
+    supportWebSearch: true,
+    maxTokens: 1048576, // 1M tokens, 2M coming soon
   },
   {
-    id: "gemini-pro-vision",
-    name: "gemini-pro-vision",
-    displayName: "Gemini Pro Vision",
-    description: "Optimized for visual understanding and multimodal reasoning",
+    id: "gemini-2.5-flash",
+    name: "gemini-2.5-flash",
+    displayName: "Gemini 2.5 Flash",
+    description: "Best price-performance model optimized for large scale processing and low latency",
     supportImages: true,
-    supportWebSearch: false,
-    maxTokens: 30720,
+    supportWebSearch: true,
+    maxTokens: 1048576,
+  },
+  {
+    id: "gemini-2.5-flash-lite",
+    name: "gemini-2.5-flash-lite",
+    displayName: "Gemini 2.5 Flash Lite",
+    description: "Fast, low-cost, high-performance model for efficient processing",
+    supportImages: true,
+    supportWebSearch: true,
+    maxTokens: 1048576,
+  },
+  {
+    id: "gemini-2.0-flash",
+    name: "gemini-2.0-flash",
+    displayName: "Gemini 2.0 Flash",
+    description: "Next-gen model with superior speed and native tool use",
+    supportImages: true,
+    supportWebSearch: true,
+    maxTokens: 1048576, // 1M token context window
   },
   {
     id: "gemini-1.5-pro",
     name: "gemini-1.5-pro",
     displayName: "Gemini 1.5 Pro",
-    description: "Latest model with enhanced capabilities and longer context",
+    description: "Enhanced model with 2M token context window",
     supportImages: true,
     supportWebSearch: true,
-    maxTokens: 1048576,
+    maxTokens: 2097152, // 2M token context window
   },
   {
     id: "gemini-1.5-flash",
@@ -72,7 +90,7 @@ class GeminiService {
 
   async generateResponse(
     prompt: string,
-    modelName: string = "gemini-pro",
+    modelName: string = "gemini-2.5-pro",
     options?: {
       temperature?: number;
       maxTokens?: number;
@@ -127,7 +145,7 @@ class GeminiService {
         return "Demo Chat";
       }
 
-      const model = this.getModel("gemini-pro");
+      const model = this.getModel("gemini-2.5-pro");
       const prompt = `Generate a short, concise title (3-5 words) for a chat conversation that starts with this message: "${firstMessage}". Only return the title, no quotes or extra text.`;
 
       const result = await model.generateContent(prompt);

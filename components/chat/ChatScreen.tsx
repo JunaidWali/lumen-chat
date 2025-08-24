@@ -7,6 +7,7 @@ import {
   Keyboard,
   Platform,
   Text,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -343,7 +344,8 @@ export function ChatScreen({ conversationId }: ChatScreenProps) {
   return (
     <SafeAreaView className="flex-1 bg-white" edges={["top", "left", "right"]}>
       <StatusBar style="dark" />
-      <View className="flex-1">
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View className="flex-1">
         {/* Model Selector */}
         <ModelSelector
           selectedModel={selectedModel}
@@ -361,8 +363,8 @@ export function ChatScreen({ conversationId }: ChatScreenProps) {
             marginBottom:
               keyboardHeight > 0
                 ? Platform.OS === "ios"
-                  ? keyboardHeight - 34 + 16
-                  : keyboardHeight + 16
+                  ? keyboardHeight - 34
+                  : keyboardHeight - 40
                 : 0,
           }}
         >
@@ -405,8 +407,8 @@ export function ChatScreen({ conversationId }: ChatScreenProps) {
             bottom:
               keyboardHeight > 0
                 ? Platform.OS === "ios"
-                  ? keyboardHeight - 34 + 16
-                  : keyboardHeight + 16
+                  ? keyboardHeight - 34
+                  : keyboardHeight - 40
                 : 0,
             left: 0,
             right: 0,
@@ -423,7 +425,8 @@ export function ChatScreen({ conversationId }: ChatScreenProps) {
             placeholder={`Message ${selectedModel.displayName}...`}
           />
         </View>
-      </View>
+        </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
